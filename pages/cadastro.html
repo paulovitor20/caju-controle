@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Cadastro - CAJU CONTROL</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b1220,
+                    #172554
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #172033;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            padding: 20px;
+
+        }
+
+
+        .card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.25);
+
+        }
+
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .logo h1 {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            color: #111827;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .logo p {
+
+            margin-top: 6px;
+
+            font-size: 14px;
+
+            color: #64748b;
+
+        }
+
+
+        .titulo {
+
+            text-align: center;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            margin-bottom: 24px;
+
+            color: #1e293b;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #334155;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            padding: 0 14px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.12);
+
+        }
+
+
+        .senha-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .senha-wrapper input {
+
+            padding-right: 75px;
+
+        }
+
+
+        .mostrar-senha {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            color: #64748b;
+
+        }
+
+
+        .btn-cadastrar {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .btn-cadastrar:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .btn-cadastrar:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .mensagem {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .mensagem.erro {
+
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fecaca;
+
+        }
+
+
+        .mensagem.sucesso {
+
+            display: block;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border: 1px solid #bbf7d0;
+
+        }
+
+
+        .voltar {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+        }
+
+
+        .voltar button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .voltar button:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        .rodape {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 12px;
+
+            color: #94a3b8;
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .card {
+
+                padding: 30px 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+
+            <!-- ================================= -->
+            <!-- LOGO -->
+            <!-- ================================= -->
+
+            <div class="logo">
+
+                <h1>
+                    CAJU CONTROL
+                </h1>
+
+                <p>
+                    Controle Financeiro
+                </p>
+
+            </div>
+
+
+            <div class="titulo">
+
+                Criar sua conta
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- MENSAGEM -->
+            <!-- ================================= -->
+
+            <div
+                id="mensagem"
+                class="mensagem"
+            ></div>
+
+
+            <!-- ================================= -->
+            <!-- FORMULÁRIO -->
+            <!-- ================================= -->
+
+            <form id="formCadastro">
+
+
+                <!-- NOME -->
+
+                <div class="form-group">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Digite seu nome"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SENHA -->
+
+                <div class="form-group">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <div class="senha-wrapper">
+
+                        <input
+                            type="password"
+                            id="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="mostrar-senha"
+                            id="btnMostrarSenha"
+                        >
+                            Mostrar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRMAR SENHA -->
+
+                <div class="form-group">
+
+                    <label for="confirmarSenha">
+                        Confirmar senha
+                    </label>
+
+                    <div class="senha-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirmarSenha"
+                            placeholder="Digite a senha novamente"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="mostrar-senha"
+                            id="btnMostrarConfirmar"
+                        >
+                            Mostrar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="submit"
+                    class="btn-cadastrar"
+                    id="btnCadastrar"
+                >
+                    Criar conta
+                </button>
+
+
+            </form>
+
+
+            <!-- ================================= -->
+            <!-- VOLTAR -->
+            <!-- ================================= -->
+
+            <div class="voltar">
+
+                <button
+                    type="button"
+                    id="btnVoltar"
+                >
+                    ← Voltar para o login
+                </button>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- RODAPÉ -->
+            <!-- ================================= -->
+
+            <div class="rodape">
+
+                CAJU CONTROL © 2026
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- SUPABASE -->
+    <!-- ===================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- ===================================== -->
+    <!-- CLIENTE SUPABASE -->
+    <!-- ===================================== -->
+
+    <script src="../assets/js/services/supabaseClient.js"></script>
+
+
+    <!-- ===================================== -->
+    <!-- AUTENTICAÇÃO -->
+    <!-- ===================================== -->
+
+    <script src="../assets/js/services/auth.js"></script>
+
+
+    <script>
+
+        // =====================================
+        // ELEMENTOS
+        // =====================================
+
+        const formCadastro =
+            document.getElementById(
+                "formCadastro"
+            );
+
+        const nomeInput =
+            document.getElementById(
+                "nome"
+            );
+
+        const emailInput =
+            document.getElementById(
+                "email"
+            );
+
+        const senhaInput =
+            document.getElementById(
+                "senha"
+            );
+
+        const confirmarSenhaInput =
+            document.getElementById(
+                "confirmarSenha"
+            );
+
+        const btnCadastrar =
+            document.getElementById(
+                "btnCadastrar"
+            );
+
+        const btnVoltar =
+            document.getElementById(
+                "btnVoltar"
+            );
+
+        const btnMostrarSenha =
+            document.getElementById(
+                "btnMostrarSenha"
+            );
+
+        const btnMostrarConfirmar =
+            document.getElementById(
+                "btnMostrarConfirmar"
+            );
+
+        const mensagem =
+            document.getElementById(
+                "mensagem"
+            );
+
+
+        // =====================================
+        // MENSAGEM
+        // =====================================
+
+        function mostrarMensagem(
+            texto,
+            tipo = "erro"
+        ) {
+
+            mensagem.textContent =
+                texto;
+
+            mensagem.className =
+                "mensagem " + tipo;
+
+        }
+
+
+        function limparMensagem() {
+
+            mensagem.textContent =
+                "";
+
+            mensagem.className =
+                "mensagem";
+
+        }
+
+
+        // =====================================
+        // MOSTRAR / OCULTAR SENHA
+        // =====================================
+
+        btnMostrarSenha.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    senhaInput.type ===
+                    "password"
+                ) {
+
+                    senhaInput.type =
+                        "text";
+
+                    btnMostrarSenha.textContent =
+                        "Ocultar";
+
+                } else {
+
+                    senhaInput.type =
+                        "password";
+
+                    btnMostrarSenha.textContent =
+                        "Mostrar";
+
+                }
+
+            }
+        );
+
+
+        btnMostrarConfirmar.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    confirmarSenhaInput.type ===
+                    "password"
+                ) {
+
+                    confirmarSenhaInput.type =
+                        "text";
+
+                    btnMostrarConfirmar.textContent =
+                        "Ocultar";
+
+                } else {
+
+                    confirmarSenhaInput.type =
+                        "password";
+
+                    btnMostrarConfirmar.textContent =
+                        "Mostrar";
+
+                }
+
+            }
+        );
+
+
+        // =====================================
+        // CADASTRO
+        // =====================================
+
+        formCadastro.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                limparMensagem();
+
+
+                const nome =
+                    nomeInput.value.trim();
+
+                const email =
+                    emailInput.value.trim();
+
+                const senha =
+                    senhaInput.value;
+
+                const confirmarSenha =
+                    confirmarSenhaInput.value;
+
+
+                // =================================
+                // VALIDAÇÕES
+                // =================================
+
+                if (!nome) {
+
+                    mostrarMensagem(
+                        "Informe seu nome."
+                    );
+
+                    nomeInput.focus();
+
+                    return;
+
+                }
+
+
+                if (!email) {
+
+                    mostrarMensagem(
+                        "Informe seu e-mail."
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                if (!senha) {
+
+                    mostrarMensagem(
+                        "Informe uma senha."
+                    );
+
+                    senhaInput.focus();
+
+                    return;
+
+                }
+
+
+                if (senha.length < 6) {
+
+                    mostrarMensagem(
+                        "A senha deve possuir pelo menos 6 caracteres."
+                    );
+
+                    senhaInput.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    senha !==
+                    confirmarSenha
+                ) {
+
+                    mostrarMensagem(
+                        "As senhas não coincidem."
+                    );
+
+                    confirmarSenhaInput.focus();
+
+                    return;
+
+                }
+
+
+                // =================================
+                // BLOQUEAR BOTÃO
+                // =================================
+
+                btnCadastrar.disabled =
+                    true;
+
+                btnCadastrar.textContent =
+                    "Criando conta...";
+
+
+                // =================================
+                // SUPABASE
+                // =================================
+
+                const resultado =
+                    await AuthService.cadastrar(
+                        nome,
+                        email,
+                        senha
+                    );
+
+
+                // =================================
+                // ERRO
+                // =================================
+
+                if (
+                    !resultado.sucesso
+                ) {
+
+                    console.error(
+                        resultado.erro
+                    );
+
+
+                    let mensagemErro =
+                        "Não foi possível criar a conta.";
+
+
+                    if (
+                        resultado.erro
+                            ?.toLowerCase()
+                            .includes(
+                                "already registered"
+                            )
+                    ) {
+
+                        mensagemErro =
+                            "Este e-mail já está cadastrado.";
+
+                    }
+
+
+                    mostrarMensagem(
+                        mensagemErro
+                    );
+
+
+                    btnCadastrar.disabled =
+                        false;
+
+                    btnCadastrar.textContent =
+                        "Criar conta";
+
+                    return;
+
+                }
+
+
+                // =================================
+                // SUCESSO
+                // =================================
+
+                mostrarMensagem(
+                    "Conta criada com sucesso! Entrando...",
+                    "sucesso"
+                );
+
+
+                // =================================
+                // ENTRAR NO SISTEMA
+                // =================================
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    700
+                );
+
+            }
+        );
+
+
+        // =====================================
+        // VOLTAR
+        // =====================================
+
+        btnVoltar.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
