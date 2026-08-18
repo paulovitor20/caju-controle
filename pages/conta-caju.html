@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Página</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <aside id="sidebar"></aside>
+
+        <main>
+
+            <header id="header"></header>
+
+            <section class="content">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>Conta CAJU</h1>
+
+                        <p class="subtitle">
+                            Controle da conta principal
+                        </p>
+
+                    </div>
+
+                    <button class="btn-primary">
+
+                        + Ajustar Saldo
+
+                    </button>
+
+                </div>
+
+                <div class="cards">
+
+                    <div class="card blue">
+
+                        <span>Saldo Atual</span>
+
+                        <h2 id="saldoConta">
+
+                            R$ 50.000,00
+
+                        </h2>
+
+                    </div>
+
+                    <div class="card green">
+
+                        <span>Total Aportado</span>
+
+                        <h2>
+
+                            R$ 0,00
+
+                        </h2>
+
+                    </div>
+
+                    <div class="card red">
+
+                        <span>Total Estornado</span>
+
+                        <h2>
+
+                            R$ 0,00
+
+                        </h2>
+
+                    </div>
+
+                    <div class="card gray">
+
+                        <span>Saldo Disponível</span>
+
+                        <h2>
+
+                            R$ 50.000,00
+
+                        </h2>
+
+                    </div>
+
+                </div>
+                <div class="filters">
+
+                    <div class="filter-group">
+
+                        <label>Período</label>
+
+                        <input type="date" class="form-control">
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <label>Tipo</label>
+
+                        <select class="form-control">
+
+                            <option>Todos</option>
+
+                            <option>Aporte</option>
+
+                            <option>Estorno</option>
+
+                            <option>Ajuste</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <label>Pesquisar</label>
+
+                        <input class="form-control" placeholder="Descrição...">
+
+                    </div>
+
+                    <div class="filter-actions">
+
+                        <button class="btn btn-secondary">
+
+                            Limpar
+
+                        </button>
+
+                        <button class="btn btn-primary">
+
+                            Filtrar
+
+                        </button>
+
+                    </div>
+
+                </div>
+                <div class="panel">
+
+                    <div class="table-header">
+
+                        <h3>Extrato da Conta</h3>
+
+                        <input type="text" placeholder="Pesquisar movimentação...">
+
+                    </div>
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Data</th>
+
+                                <th>Tipo</th>
+
+                                <th>Descrição</th>
+
+                                <th>Entrada</th>
+
+                                <th>Saída</th>
+
+                                <th>Saldo</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <div class="empty-state">
+
+                                    <div class="empty-icon">
+                                        📄
+                                    </div>
+
+                                    <h3>
+                                        Nenhuma movimentação encontrada
+                                    </h3>
+
+                                    <p>
+                                        Quando houver lançamentos eles aparecerão aqui.
+                                    </p>
+
+                                </div>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../assets/components/sidebar.js"></script>
+    <script src="../assets/components/header.js"></script>
+
+</body>
+
+</html>

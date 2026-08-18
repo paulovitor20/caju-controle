@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartões Corporativos</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <!-- =======================================================
+        SIDEBAR
+        ======================================================== -->
+
+        <aside id="sidebar"></aside>
+
+
+        <!-- =======================================================
+        CONTEÚDO
+        ======================================================== -->
+
+        <main>
+
+            <header id="header"></header>
+
+
+            <section class="content">
+
+                <!-- ===================================================
+                CABEÇALHO DA PÁGINA
+                ==================================================== -->
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>
+                            Cartões Corporativos
+                        </h1>
+
+                        <p class="subtitle">
+                            Gerencie os cartões e seus respectivos saldos.
+                        </p>
+
+                    </div>
+
+
+                    <div class="page-header-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="abrirModalCartao()">
+
+                            + Novo Cartão
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ===================================================
+                TABELA DE CARTÕES
+                ==================================================== -->
+
+                <div class="table-card">
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Funcionário
+                                </th>
+
+                                <th>
+                                    Final
+                                </th>
+
+                                <th>
+                                    Centro de Custo
+                                </th>
+
+                                <th>
+                                    Saldo
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th width="90">
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tbody-cartoes">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =======================================================
+    MODAL NOVO CARTÃO
+    ======================================================== -->
+
+    <div
+        class="modal"
+        id="modalCartao">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2>
+                    Novo Cartão
+                </h2>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Funcionário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="funcionario">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Final do Cartão
+                    </label>
+
+                    <input
+                        type="text"
+                        id="final">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Centro de Custo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="centroCusto">
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="fecharModalCartao()">
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    class="btn btn-primary"
+                    onclick="salvarCartao()">
+
+                    Salvar
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =======================================================
+    MODAL APORTE
+    ======================================================== -->
+
+    <div
+        class="modal"
+        id="modalAporte">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2>
+                    Realizar Aporte
+                </h2>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    <label>
+                        Valor do Aporte
+                    </label>
+
+                    <input
+                        type="number"
+                        id="valorAporte"
+                        class="form-control"
+                        placeholder="0,00">
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="fecharModalAporte()">
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    class="btn btn-primary"
+                    onclick="confirmarAporte()">
+
+                    Confirmar
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =======================================================
+    MODAL ESTORNO
+    ======================================================== -->
+
+    <div
+        class="modal"
+        id="modalEstorno">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2>
+                    Estornar Saldo
+                </h2>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    onclick="fecharModalEstorno()">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Valor do Estorno
+                    </label>
+
+                    <input
+                        type="number"
+                        id="valorEstorno"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="0,00">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Motivo
+                    </label>
+
+                    <textarea
+                        id="motivoEstorno"
+                        rows="3"
+                        placeholder="Informe o motivo do estorno..."></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="fecharModalEstorno()">
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    onclick="confirmarEstorno()">
+
+                    Confirmar Estorno
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =======================================================
+    DRAWER DO CARTÃO
+    ======================================================== -->
+
+    <div
+        class="drawer-overlay"
+        id="drawerOverlay"
+        onclick="fecharDrawer()">
+    </div>
+
+
+    <div
+        class="drawer"
+        id="drawerCartao">
+
+
+        <!-- ===================================================
+        CABEÇALHO DRAWER
+        ==================================================== -->
+
+        <div class="drawer-header">
+
+            <div>
+
+                <h2 id="drawerFuncionario">
+
+                    Funcionário
+
+                </h2>
+
+
+                <span id="drawerFinal">
+
+                    Final 0000
+
+                </span>
+
+            </div>
+
+
+            <button
+                class="btn-close"
+                onclick="fecharDrawer()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <!-- ===================================================
+        CORPO DRAWER
+        ==================================================== -->
+
+        <div class="drawer-body">
+
+
+            <!-- =================================================
+            CARDS RESUMO
+            ================================================== -->
+
+            <div class="drawer-cards">
+
+
+                <!-- SALDO -->
+
+                <div class="mini-card">
+
+                    <span>
+                        Saldo Atual
+                    </span>
+
+                    <strong id="drawerSaldo">
+
+                        R$ 0,00
+
+                    </strong>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="mini-card">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="drawerStatus">
+
+                        Ativo
+
+                    </strong>
+
+                </div>
+
+
+                <!-- DESPESAS PENDENTES -->
+
+                <div class="mini-card">
+
+                    <span>
+                        Despesas Pendentes
+                    </span>
+
+                    <strong id="drawerDespesasPendentes">
+
+                        R$ 0,00
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+            AÇÕES
+            ================================================== -->
+
+            <div class="drawer-actions">
+
+
+                <button
+                    type="button"
+                    id="btnAporteDrawer"
+                    class="btn btn-primary">
+
+                    + Aportar Saldo
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnEstornoDrawer"
+                    class="btn btn-secondary">
+
+                    Estornar Saldo
+
+                </button>
+
+
+            </div>
+
+
+            <hr>
+
+
+            <!-- =================================================
+            EXTRATO
+            ================================================== -->
+
+            <h3>
+
+                Últimas Movimentações
+
+            </h3>
+
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Data
+                        </th>
+
+                        <th>
+                            Tipo
+                        </th>
+
+                        <th>
+                            Valor
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="extratoCartao">
+
+                    <tr>
+
+                        <td
+                            colspan="3"
+                            class="empty">
+
+                            Nenhuma movimentação encontrada.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =======================================================
+    SCRIPTS
+    ======================================================== -->
+
+
+    <!-- COMPONENTES -->
+
+    <script src="../assets/components/sidebar.js"></script>
+
+    <script src="../assets/components/header.js"></script>
+
+
+    <!-- =======================================================
+    SUPABASE
+    ======================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../assets/js/services/supabaseClient.js"></script>
+
+
+    <!-- =======================================================
+    UI
+    ======================================================== -->
+
+    <script src="../assets/js/ui/modalUI.js"></script>
+
+    <script src="../assets/js/ui/toastUI.js"></script>
+
+
+    <!-- =======================================================
+    SERVICES
+    ======================================================== -->
+
+    <script src="../assets/js/services/cartaoService.js"></script>
+
+
+    <!-- =======================================================
+    DADOS
+    ======================================================== -->
+
+    <script src="../assets/js/conta.js"></script>
+
+    <script src="../assets/js/movimentacoes.js"></script>
+
+
+    <!-- =======================================================
+    MÓDULOS
+    ======================================================== -->
+
+    <script src="../assets/js/aportes.js"></script>
+
+    <script src="../assets/js/cartoes.js"></script>
+
+
+    <!-- =======================================================
+    AUTENTICAÇÃO
+    ======================================================== -->
+
+    <script src="../assets/js/services/auth.js"></script>
+
+    <script src="../assets/js/services/authGuard.js"></script>
+
+
+    <script>
+
+        AuthGuard.protegerPagina();
+
+    </script>
+
+
+</body>
+
+</html>

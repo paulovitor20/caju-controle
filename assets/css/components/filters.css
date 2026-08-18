@@ -1,0 +1,53 @@
+/* ======================================
+   FILTROS
+====================================== */
+
+.filters{
+
+    display:flex;
+
+    align-items:end;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:24px;
+
+}
+
+.filter-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.filter-group label{
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:#64748B;
+
+}
+
+.filter-group .form-control{
+
+    min-width:180px;
+
+}
+
+.filter-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-left:auto;
+
+}

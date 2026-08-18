@@ -1,0 +1,159 @@
+/* ==========================
+   GERAL
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:var(--background);
+
+    color:var(--text);
+
+    font-family:Inter,"Segoe UI",sans-serif;
+
+}
+
+/* ==========================
+   LAYOUT
+========================== */
+
+.container{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+}
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+#sidebar{
+
+    width:260px;
+
+    min-width:260px;
+
+    background:#0F172A;
+
+    color:#FFF;
+
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+#header{
+
+    height:70px;
+
+    background:#FFF;
+
+    border-bottom:1px solid #E2E8F0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 22px;
+
+}
+
+/* ==========================
+   CONTEÚDO
+========================== */
+
+.content{
+
+    flex:1;
+
+    padding:30px;
+
+    background:#F8FAFC;
+
+}
+
+/* ==========================
+   PAINÉIS
+========================== */
+
+.panel{
+
+    background:#FFF;
+
+    border-radius:16px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================
+   GRID DE CARDS
+========================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media(max-width:1200px){
+
+    .cards{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    #sidebar{
+
+        display:none;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

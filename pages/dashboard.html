@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Dashboard | Controle Financeiro</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <aside id="sidebar"></aside>
+
+        <main>
+
+            <header id="header"></header>
+
+            <section class="content">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>Dashboard Financeiro</h1>
+
+                        <p class="subtitle">
+                            Controle dos cartões corporativos
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- ==========================================
+                    CARDS FINANCEIROS
+                ========================================== -->
+
+                <div class="cards">
+
+                    <!-- SALDO CONTA CAJU -->
+
+                    <div class="card blue">
+
+                        <span>
+                            Saldo Conta CAJU
+                        </span>
+
+                        <h2 id="saldoConta">
+                            R$ 0,00
+                        </h2>
+
+                        <small>
+                            Atualizado agora
+                        </small>
+
+                    </div>
+                    <!-- SALDO TOTAL CARTÕES -->
+
+                    <div class="card green">
+
+                        <span>
+                            Saldo Total Cartões
+                        </span>
+
+                        <h2 id="saldoTotalCartoes">
+                            R$ 0,00
+                        </h2>
+                    </div>
+                    <!-- DESPESAS PENDENTES -->
+
+                    <div class="card red">
+
+                        <span>
+                            Despesas Pendentes
+                        </span>
+
+                        <h2 id="despesasPendentes">
+                            R$ 0,00
+                        </h2>
+
+                    </div>
+                    <!-- DIFERENÇA -->
+
+                    <div class="card gray">
+
+                        <span>
+                            Diferença
+                        </span>
+
+                        <h2 id="diferencaSaldo">
+                            R$ 0,00
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+
+                <div class="panel">
+
+                    <h3>Ações Rápidas</h3>
+
+                    <div class="acoes">
+
+                        <button class="acao azul" onclick="abrirNovoAporte()">
+                            💰
+                            <span>
+                                Novo Aporte
+                            </span>
+                        </button>
+                        <button class="acao verde" onclick="abrirNovaDespesa()">
+
+                            🧾
+
+                            <span>
+                                Nova Despesa
+                            </span>
+
+                        </button>
+
+                        <button class="acao laranja" onclick="abrirNovoEstorno()">
+
+                            ↩
+
+                            <span>
+
+                                Estornar Saldo
+
+                            </span>
+
+                        </button>
+
+                        <button class="acao azul" onclick="abrirAporteSaldo()">
+                            💰
+                            <span>
+                                Aporte de Saldo
+                            </span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="painel-dashboard">
+
+                    <div class="panel">
+
+                        <h3>
+
+                            Últimas Movimentações
+
+                        </h3>
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Data</th>
+
+                                    <th>Funcionário</th>
+
+                                    <th>Tipo</th>
+
+                                    <th>Valor</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="tbodyUltimasMovimentacoes">
+                                <tr>
+                                    <td colspan="4" class="empty">
+                                        Carregando movimentações...
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="panel">
+
+                        <h3>
+
+                            Cartões com Menor Saldo
+
+                        </h3>
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Funcionário</th>
+
+                                    <th>Saldo</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="tbodyCartoesMenorSaldo">
+
+                                <tr>
+
+                                    <td colspan="2" class="empty">
+
+                                        Nenhum cartão.
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+            <div class="modal" id="modalMovimentacao">
+
+                <div class="modal-content modal-lg">
+
+                    <div class="modal-header">
+
+                        <h2>Nova Movimentação</h2>
+
+                        <button class="btn-close" onclick="fecharModalMovimentacao()">
+                            ✕
+                        </button>
+
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+
+                            <label>Tipo da Movimentação</label>
+
+                            <select id="tipoMovimentacao" onchange="trocarFormulario()">
+
+                                <option value="">Selecione...</option>
+
+                                <option value="aporte">Aporte</option>
+
+                                <option value="despesa">Despesa</option>
+
+                                <option value="estorno">Estorno</option>
+
+                                <option value="ajuste">Ajuste</option>
+
+                            </select>
+
+                        </div>
+
+                        <div id="formMovimentacao">
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button class="btn-secondary" onclick="fecharModalMovimentacao()">
+
+                            Cancelar
+
+                        </button>
+
+                        <button class="btn-primary">
+
+                            Salvar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+    <div class="modal" id="modalNovoAporte">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    Novo Aporte
+
+                </h2>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    <label>
+
+                        Cartão
+
+                    </label>
+
+                    <select id="cartaoNovoAporte">
+                        <option value="">
+                            Selecione um cartão...
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Valor
+
+                    </label>
+
+                    <input type="number" id="valorNovoAporte" min="0.01" step="0.01" placeholder="0,00">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button class="btn btn-secondary" onclick="fecharModal('modalNovoAporte')">
+
+                    Cancelar
+
+                </button>
+
+                <button class="btn btn-primary" onclick="confirmarNovoAporte()">
+
+                    Confirmar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- ==========================================
+     MODAL APORTE DE SALDO NA CONTA CAJU
+========================================== -->
+
+    <div class="modal" id="modalAporteSaldo">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>
+                    Aporte de Saldo
+                </h2>
+
+                <button type="button" class="btn-close" onclick="fecharAporteSaldo()" aria-label="Fechar">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    <label for="valorAporteSaldo">
+                        Valor
+                    </label>
+
+                    <input type="number" id="valorAporteSaldo" min="0.01" step="0.01" placeholder="0,00">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="descricaoAporteSaldo">
+                        Descrição
+                    </label>
+
+                    <textarea id="descricaoAporteSaldo" rows="4" placeholder="Ex.: Recarga da conta CAJU..."></textarea>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Conta CAJU
+                    </strong>
+
+                    <p>
+                        Este aporte será adicionado diretamente
+                        ao saldo disponível da Conta CAJU.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" onclick="fecharAporteSaldo()">
+
+                    Cancelar
+
+                </button>
+
+
+                <button type="button" class="btn btn-primary" onclick="confirmarAporteSaldo()">
+
+                    Confirmar Aporte
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- ==========================================
+     MODAL NOVA DESPESA
+========================================== -->
+
+    <div class="modal" id="modalNovaDespesa">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Nova Despesa</h2>
+
+                <button type="button" class="btn-close" onclick="fecharNovaDespesa()" aria-label="Fechar">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    <label for="fornecedorNovaDespesa">
+                        Fornecedor
+                    </label>
+
+                    <input type="text" id="fornecedorNovaDespesa" placeholder="Nome do fornecedor">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="categoriaNovaDespesa">
+                        Categoria
+                    </label>
+
+                    <select id="categoriaNovaDespesa">
+
+                        <option value="">
+                            Selecione uma categoria...
+                        </option>
+
+                        <option value="Combustível">
+                            Combustível
+                        </option>
+
+                        <option value="Alimentação">
+                            Alimentação
+                        </option>
+
+                        <option value="Manutenção">
+                            Manutenção
+                        </option>
+
+                        <option value="Operacional">
+                            Operacional
+                        </option>
+
+                        <option value="Outros">
+                            Outros
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="centroCustoNovaDespesa">
+                        Centro de Custo
+                    </label>
+
+                    <select id="centroCustoNovaDespesa">
+
+                        <option value="">
+                            Selecione o centro de custo...
+                        </option>
+
+                        <option value="Operacional">
+                            Operacional
+                        </option>
+
+                        <option value="Administrativo">
+                            Administrativo
+                        </option>
+
+                        <option value="Financeiro">
+                            Financeiro
+                        </option>
+
+                    </select>
+
+                </div>
+                <div class="form-group">
+
+                    <label for="cartaoNovaDespesa">
+                        Cartão
+                    </label>
+
+                    <select id="cartaoNovaDespesa">
+
+                        <option value="">
+                            Selecione um cartão...
+                        </option>
+
+                    </select>
+
+                </div>
+                <div class="form-group">
+
+                    <label for="valorNovaDespesa">
+                        Valor
+                    </label>
+
+                    <input type="number" id="valorNovaDespesa" min="0.01" step="0.01" placeholder="0,00">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="descricaoNovaDespesa">
+                        Descrição
+                    </label>
+
+                    <textarea id="descricaoNovaDespesa" rows="3" placeholder="Descreva a despesa..."></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" onclick="fecharNovaDespesa()">
+
+                    Cancelar
+
+                </button>
+
+                <button type="button" class="btn btn-primary" onclick="confirmarNovaDespesa()">
+
+                    Salvar Despesa
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+     MODAL NOVO ESTORNO
+========================================== -->
+
+    <div class="modal" id="modalNovoEstorno">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>Estornar Saldo</h2>
+
+                <button type="button" class="btn-close" onclick="fecharModal('modalNovoEstorno')" aria-label="Fechar">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    <label for="cartaoNovoEstorno">
+                        Cartão
+                    </label>
+
+                    <select id="cartaoNovoEstorno">
+
+                        <option value="">
+                            Selecione um cartão...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="valorNovoEstorno">
+                        Valor do Estorno
+                    </label>
+
+                    <input type="number" id="valorNovoEstorno" min="0.01" step="0.01" placeholder="R$ 0,00">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="motivoNovoEstorno">
+                        Motivo
+                    </label>
+
+                    <textarea id="motivoNovoEstorno" rows="3" placeholder="Informe o motivo do estorno..."></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" onclick="fecharModal('modalNovoEstorno')">
+
+                    Cancelar
+
+                </button>
+
+
+                <button type="button" class="btn btn-danger" onclick="confirmarNovoEstorno()">
+
+                    Confirmar Estorno
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- ==========================================
+     SUPABASE
+========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../assets/js/services/supabaseClient.js"></script>
+
+
+    <!-- ==========================================
+     AUTENTICAÇÃO
+========================================== -->
+
+    <script src="../assets/js/services/auth.js"></script>
+
+    <script src="../assets/js/services/authGuard.js"></script>
+
+
+    <!-- ==========================================
+     COMPONENTES
+========================================== -->
+
+    <script src="../assets/components/sidebar.js"></script>
+
+    <script src="../assets/components/header.js"></script>
+
+
+    <!-- ==========================================
+     UI
+========================================== -->
+
+    <script src="../assets/js/ui/modalUI.js"></script>
+
+    <script src="../assets/js/ui/toastUI.js"></script>
+
+
+    <!-- ==========================================
+     SERVICES
+========================================== -->
+
+    <script src="../assets/js/services/cartaoService.js"></script>
+
+    <script src="../assets/js/services/despesaService.js"></script>
+
+
+    <!-- ==========================================
+     DADOS / REGRAS
+========================================== -->
+
+    <script src="../assets/js/conta.js"></script>
+
+    <script src="../assets/js/movimentacoes.js"></script>
+
+    <script src="../assets/js/aportes.js"></script>
+
+
+    <!-- ==========================================
+     MODAIS
+========================================== -->
+
+    <script src="../assets/js/modals/aporteModal.js"></script>
+
+    <script src="../assets/js/modals/estornoModal.js"></script>
+
+    <script src="../assets/js/modals/despesaModal.js"></script>
+
+
+    <!-- ==========================================
+     FINANCEIRO
+========================================== -->
+
+    <script src="../assets/js/financeiro.js"></script>
+
+
+    <!-- ==========================================
+     LEGADO
+========================================== -->
+
+    <script src="../assets/js/movimentacaoModal.js"></script>
+
+
+    <!-- ==========================================
+     PROTEGER PÁGINA
+========================================== -->
+
+    <script>
+
+        AuthGuard.protegerPagina();
+
+    </script>
+</body>
+
+</html>

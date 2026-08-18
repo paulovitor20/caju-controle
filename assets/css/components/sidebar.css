@@ -1,0 +1,137 @@
+/* ===================================
+   SIDEBAR
+=================================== */
+
+#sidebar{
+
+    width:260px;
+
+    min-width:260px;
+
+    background:#0F172A;
+
+    color:#FFF;
+
+    display:flex;
+
+    flex-direction:column;
+
+    height:100vh;
+
+    position:sticky;
+
+    top:0;
+
+}
+
+/* LOGO */
+
+.logo{
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo h2{
+
+    color:#FFF !important;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+/* MENU */
+
+.menu{
+
+    padding:20px 14px;
+
+    overflow-y:auto;
+
+    flex:1;
+
+}
+
+.menu-title{
+
+    color:#94A3B8 !important;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin:20px 12px 8px;
+
+    text-transform:uppercase;
+
+}
+
+.menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    height:44px;
+
+    padding:0 14px;
+
+    margin-bottom:6px;
+
+    border-radius:10px;
+
+    text-decoration:none !important;
+
+    color:#E2E8F0 !important;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+.menu a:hover{
+
+    background:#1E293B;
+
+    color:#FFF;
+
+}
+
+.menu a.active{
+
+    background:#2563EB;
+
+    color:#FFF;
+
+}
+
+.menu::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.menu::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:10px;
+
+}

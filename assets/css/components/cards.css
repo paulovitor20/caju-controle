@@ -1,0 +1,128 @@
+/* =======================================
+   CARD PADRÃO
+======================================= */
+
+.card{
+
+    background:#FFF;
+
+    border-radius:16px;
+
+    padding:22px;
+
+    box-shadow:0 4px 16px rgba(15,23,42,.06);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 24px rgba(15,23,42,.10);
+
+}
+
+/* Barra superior */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:4px;
+
+    height:100%;
+
+    background:#2563EB;
+
+}
+
+/* Cores */
+
+.card.blue::before{
+
+    background:#2563EB;
+
+}
+
+.card.green::before{
+
+    background:#10B981;
+
+}
+
+.card.red::before{
+
+    background:#EF4444;
+
+}
+
+.card.gray::before{
+
+    background:#64748B;
+
+}
+
+/* Título */
+
+.card span{
+
+    display:block;
+
+    color:#64748B;
+
+    font-size:14px;
+
+    margin-bottom:12px;
+
+}
+
+/* Valor */
+
+.card h2{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#0F172A;
+
+    margin:0;
+
+}
+
+/* Rodapé */
+
+.card small{
+
+    display:block;
+
+    margin-top:12px;
+
+    color:#94A3B8;
+
+    font-size:12px;
+
+}
+.table-card{
+
+    background:#FFF;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:0 4px 14px rgba(15,23,42,.05);
+
+}

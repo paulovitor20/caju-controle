@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Movimentações | CAJU CONTROL</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <aside id="sidebar"></aside>
+
+        <main>
+
+            <header id="header"></header>
+
+            <section class="content">
+
+                <!-- ==========================================
+                     CABEÇALHO
+                =========================================== -->
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>
+                            Movimentações
+                        </h1>
+
+                        <p class="subtitle">
+                            Livro caixa das movimentações financeiras
+                        </p>
+
+                    </div>
+
+                    <button class="btn-primary" type="button">
+
+                        + Nova Movimentação
+
+                    </button>
+
+                </div>
+
+
+                <!-- ==========================================
+                     FILTROS
+                =========================================== -->
+
+                <div class="panel">
+
+                    <div class="table-header">
+
+                        <input type="date" id="dataInicial">
+
+
+                        <input type="date" id="dataFinal">
+
+
+                        <select id="filtroTipo">
+
+                            <option value="">
+                                Todos os Tipos
+                            </option>
+
+                            <option value="APORTE">
+                                Aporte
+                            </option>
+
+                            <option value="DESPESA">
+                                Despesa
+                            </option>
+
+                            <option value="ESTORNO">
+                                Estorno
+                            </option>
+
+                            <option value="AJUSTE">
+                                Ajuste
+                            </option>
+
+                        </select>
+
+
+                        <select id="filtroCartao">
+
+                            <option value="">
+                                Todos os Cartões
+                            </option>
+
+                        </select>
+                        <button class="btn-primary" type="button" onclick="filtrarMovimentacoes()">
+
+                            Filtrar
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ==========================================
+                         TABELA
+                    =========================================== -->
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Data
+                                </th>
+
+                                <th>
+                                    Tipo
+                                </th>
+
+                                <th>
+                                    Origem
+                                </th>
+
+                                <th>
+                                    Destino
+                                </th>
+
+                                <th>
+                                    Descrição
+                                </th>
+
+                                <th>
+                                    Valor
+                                </th>
+
+                                <th>
+                                    Usuário
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tbodyMovimentacoes">
+
+                            <tr>
+
+                                <td colspan="7">
+
+                                    <div class="empty-state">
+
+                                        <div class="empty-icon">
+                                            📄
+                                        </div>
+
+                                        <h3>
+                                            Carregando movimentações...
+                                        </h3>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==========================================
+         COMPONENTES
+    =========================================== -->
+
+    <script src="../assets/components/sidebar.js"></script>
+
+    <script src="../assets/components/header.js"></script>
+
+
+    <!-- ==========================================
+         SUPABASE
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../assets/js/services/supabaseClient.js"></script>
+
+
+    <!-- ==========================================
+         AUTENTICAÇÃO
+    =========================================== -->
+
+    <script src="../assets/js/services/auth.js"></script>
+
+    <script src="../assets/js/services/authGuard.js"></script>
+
+
+    <!-- ==========================================
+         UI
+    =========================================== -->
+
+    <script src="../assets/js/ui/toastUI.js"></script>
+
+
+    <!-- ==========================================
+         DADOS
+    =========================================== -->
+    <script src="../assets/js/services/cartaoService.js"></script>
+    <script src="../assets/js/movimentacoes.js"></script>
+
+
+    <!-- ==========================================
+         PROTEGER PÁGINA
+    =========================================== -->
+
+    <script>
+
+        AuthGuard.protegerPagina();
+
+    </script>
+
+
+</body>
+
+</html>

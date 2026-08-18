@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Despesas | Controle Financeiro</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar"></aside>
+
+
+        <main>
+
+            <!-- HEADER -->
+            <header id="header"></header>
+
+
+            <section class="content">
+
+                <!-- CABEÇALHO -->
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>Despesas</h1>
+
+                        <p class="subtitle">
+                            Controle e acompanhamento das despesas
+                        </p>
+
+                    </div>
+
+
+                    <button class="btn-primary" onclick="abrirNovaDespesa()">
+
+                        + Nova Despesa
+
+                    </button>
+
+                </div>
+
+
+                <!-- CARDS -->
+                <div class="cards">
+
+                    <div class="card blue">
+
+                        <span>
+                            Total de Despesas
+                        </span>
+
+                        <h2 id="totalDespesas">
+                            R$ 0,00
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card red">
+
+                        <span>
+                            Pendentes
+                        </span>
+
+                        <h2 id="despesasPendentes">
+                            R$ 0,00
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card green">
+
+                        <span>
+                            Pagas
+                        </span>
+
+                        <h2 id="despesasPagas">
+                            R$ 0,00
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card gray">
+
+                        <span>
+                            Quantidade
+                        </span>
+
+                        <h2 id="quantidadeDespesas">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABELA -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h3>
+                            Lista de Despesas
+                        </h3>
+
+
+                        <input type="text" id="pesquisaDespesas" placeholder="Pesquisar despesa..."
+                            oninput="renderizarDespesas()">
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Data</th>
+
+                                    <th>Fornecedor</th>
+
+                                    <th>Categoria</th>
+
+                                    <th>Centro de Custo</th>
+
+                                    <th>Descrição</th>
+
+                                    <th>Valor</th>
+
+                                    <th>Status</th>
+
+                                    <th>Ações</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="tbody-despesas">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- SCRIPTS -->
+
+    <script src="../assets/components/sidebar.js"></script>
+
+    <script src="../assets/components/header.js"></script>
+
+    <script src="../assets/js/ui/modalUI.js"></script>
+
+    <script src="../assets/js/ui/toastUI.js"></script>
+
+    <script src="../assets/js/services/despesaService.js"></script>
+
+    <script src="../assets/js/modals/despesaModal.js"></script>
+
+    <script src="../assets/js/despesas.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../assets/js/services/supabaseClient.js"></script>
+
+    <script src="../assets/js/services/auth.js"></script>
+
+    <script src="../assets/js/services/authGuard.js"></script>
+
+    <script>
+        AuthGuard.protegerPagina();
+    </script>
+</body>
+
+</html>

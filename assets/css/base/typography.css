@@ -1,0 +1,59 @@
+*{
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+}
+
+h1{
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+h3{
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+small{
+
+    color:var(--text-light);
+
+}
+
+p{
+
+    color:var(--text-light);
+
+}
+
+table{
+
+    font-size:15px;
+
+}

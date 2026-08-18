@@ -1,0 +1,172 @@
+/* ==========================================
+   DRAWER
+========================================== */
+
+.drawer-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(15,23,42,.45);
+
+    backdrop-filter:blur(2px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.25s;
+
+    z-index:999;
+
+}
+
+.drawer-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.drawer{
+
+    position:fixed;
+
+    top:0;
+
+    right:-460px;
+
+    width:460px;
+
+    height:100vh;
+
+    background:#FFF;
+
+    box-shadow:-12px 0 40px rgba(0,0,0,.15);
+
+    transition:.30s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    z-index:1000;
+
+}
+
+.drawer.show{
+
+    right:0;
+
+}
+
+.drawer-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:24px;
+
+    border-bottom:1px solid #E2E8F0;
+
+}
+
+.drawer-header h2{
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+.drawer-header span{
+
+    color:#64748B;
+
+    font-size:14px;
+
+}
+
+.drawer-body{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:24px;
+
+}
+
+.drawer-footer{
+
+    padding:20px 24px;
+
+    border-top:1px solid #E2E8F0;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+}
+.drawer-actions{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:12px;
+
+    margin:25px 0;
+
+}
+
+.drawer-cards{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:16px;
+
+    margin-bottom:20px;
+
+}
+
+.mini-card{
+
+    background:#F8FAFC;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    border:1px solid #E2E8F0;
+
+}
+
+.mini-card span{
+
+    display:block;
+
+    color:#64748B;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+
+}
+
+.mini-card strong{
+
+    font-size:20px;
+
+    color:#0F172A;
+
+}
