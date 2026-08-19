@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperar senha - CAJU CONTROL</title>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(135deg,
+                    #0b1220,
+                    #172554);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #172033;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            padding: 20px;
+
+        }
+
+
+        .card {
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.25);
+
+        }
+
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .logo h1 {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            color: #111827;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .logo p {
+
+            margin-top: 6px;
+
+            font-size: 14px;
+
+            color: #64748b;
+
+        }
+
+
+        .titulo {
+
+            text-align: center;
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+            color: #1e293b;
+
+        }
+
+
+        .descricao {
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            color: #64748b;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #334155;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            padding: 0 14px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+
+        }
+
+
+        .btn-enviar {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .btn-enviar:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .btn-enviar:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .mensagem {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px 14px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .mensagem.erro {
+
+            display: block;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fecaca;
+
+        }
+
+
+        .mensagem.sucesso {
+
+            display: block;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border: 1px solid #bbf7d0;
+
+        }
+
+
+        .voltar {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+        }
+
+
+        .voltar button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .voltar button:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        .rodape {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 12px;
+
+            color: #94a3b8;
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .card {
+
+                padding: 30px 25px;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+        <div class="card">
+
+
+            <!-- ================================= -->
+            <!-- LOGO -->
+            <!-- ================================= -->
+
+            <div class="logo">
+
+                <h1>
+                    CAJU CONTROL
+                </h1>
+
+                <p>
+                    Controle Financeiro
+                </p>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- TÍTULO -->
+            <!-- ================================= -->
+
+            <div class="titulo">
+
+                Recuperar senha
+
+            </div>
+
+
+            <div class="descricao">
+
+                Informe o e-mail cadastrado.
+                Enviaremos um link para você
+                criar uma nova senha.
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- MENSAGEM -->
+            <!-- ================================= -->
+
+            <div id="mensagem" class="mensagem"></div>
+
+
+            <!-- ================================= -->
+            <!-- FORMULÁRIO -->
+            <!-- ================================= -->
+
+            <form id="formReset">
+
+
+                <div class="form-group">
+
+                    <label for="email">
+
+                        E-mail
+
+                    </label>
+
+
+                    <input type="email" id="email" placeholder="Digite seu e-mail" autocomplete="email" required>
+
+                </div>
+
+
+                <button type="submit" class="btn-enviar" id="btnEnviar">
+
+                    Enviar link de recuperação
+
+                </button>
+
+
+            </form>
+
+
+            <!-- ================================= -->
+            <!-- VOLTAR -->
+            <!-- ================================= -->
+
+            <div class="voltar">
+
+                <button type="button" id="btnVoltar">
+
+                    ← Voltar para o login
+
+                </button>
+
+            </div>
+
+
+            <div class="rodape">
+
+                CAJU CONTROL © 2026
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- SUPABASE -->
+    <!-- ===================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- ===================================== -->
+    <!-- CLIENTE SUPABASE -->
+    <!-- ===================================== -->
+
+    <script src="../assets/js/services/supabaseClient.js"></script>
+
+
+    <!-- ===================================== -->
+    <!-- AUTENTICAÇÃO -->
+    <!-- ===================================== -->
+
+    <script src="../assets/js/services/auth.js"></script>
+
+
+    <script>
+
+        // =====================================
+        // ELEMENTOS
+        // =====================================
+
+        const formReset =
+            document.getElementById(
+                "formReset"
+            );
+
+
+        const emailInput =
+            document.getElementById(
+                "email"
+            );
+
+
+        const btnEnviar =
+            document.getElementById(
+                "btnEnviar"
+            );
+
+
+        const btnVoltar =
+            document.getElementById(
+                "btnVoltar"
+            );
+
+
+        const mensagem =
+            document.getElementById(
+                "mensagem"
+            );
+
+
+        // =====================================
+        // MENSAGEM
+        // =====================================
+
+        function mostrarMensagem(
+            texto,
+            tipo = "erro"
+        ) {
+
+            mensagem.textContent =
+                texto;
+
+            mensagem.className =
+                "mensagem " + tipo;
+
+        }
+
+
+        function limparMensagem() {
+
+            mensagem.textContent =
+                "";
+
+            mensagem.className =
+                "mensagem";
+
+        }
+
+
+        // =====================================
+        // ENVIO
+        // =====================================
+
+        formReset.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                limparMensagem();
+
+
+                const email =
+                    emailInput.value.trim();
+
+
+                if (!email) {
+
+                    mostrarMensagem(
+                        "Informe seu e-mail."
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                // =================================
+                // BLOQUEAR BOTÃO
+                // =================================
+
+                btnEnviar.disabled =
+                    true;
+
+                btnEnviar.textContent =
+                    "Enviando...";
+
+
+                // =================================
+                // RECUPERAÇÃO
+                // =================================
+
+                const resultado =
+                    await AuthService.recuperarSenha(
+                        email
+                    );
+
+
+                // =================================
+                // ERRO
+                // =================================
+
+                if (
+                    !resultado.sucesso
+                ) {
+
+                    console.error(
+                        resultado.erro
+                    );
+
+
+                    mostrarMensagem(
+                        "Não foi possível enviar o link de recuperação."
+                    );
+
+
+                    btnEnviar.disabled =
+                        false;
+
+                    btnEnviar.textContent =
+                        "Enviar link de recuperação";
+
+                    return;
+
+                }
+
+
+                // =================================
+                // SUCESSO
+                // =================================
+
+                mostrarMensagem(
+                    "Link de recuperação enviado! Verifique seu e-mail.",
+                    "sucesso"
+                );
+
+
+                btnEnviar.disabled =
+                    false;
+
+                btnEnviar.textContent =
+                    "Enviar link de recuperação";
+
+            }
+        );
+
+
+        // =====================================
+        // VOLTAR
+        // =====================================
+
+        btnVoltar.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
