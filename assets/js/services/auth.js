@@ -230,7 +230,30 @@ const AuthService = (() => {
         }
     }
 
+    async function recuperarSenha(email) {
 
+        const { error } =
+            await supabaseClient.auth.resetPasswordForEmail(
+                email,
+                {
+                    redirectTo:
+                        `${window.location.origin}/pages/nova-senha.html`
+                }
+            );
+
+        if (error) {
+
+            return {
+                sucesso: false,
+                erro: error.message
+            };
+
+        }
+
+        return {
+            sucesso: true
+        };
+    }
     // ==================================================
     // LOGOUT
     // ==================================================
@@ -329,7 +352,7 @@ const AuthService = (() => {
         login,
         loginGoogle,
         cadastrar,
-        resetarSenha,
+        recuperarSenha,
         logout,
         usuarioAtual,
         estaAutenticado
