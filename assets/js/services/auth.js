@@ -63,16 +63,11 @@ const AuthService = (() => {
 
             const { data, error } =
                 await supabaseClient.auth.signInWithOAuth({
-
                     provider: "google",
-
                     options: {
-
                         redirectTo:
-                            `${window.location.origin}/login.html`
-
+                            `${window.location.origin}/pages/login.html`
                     }
-
                 });
 
             if (error) {
