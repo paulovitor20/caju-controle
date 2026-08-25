@@ -179,59 +179,189 @@ function fecharModalAporte() {
 
 
 // ==========================================
-// CONFIRMAR APORTE
+// CONFIRMAR APORTE DE SALDO
+// PLATAFORMA ← DINHEIRO
 // ==========================================
 
-async function confirmarAporte() {
+async function confirmarAporteSaldo() {
 
-    const campo =
-        document.getElementById(
-            "valorAporte"
-        );
-
+    const campoValor =
+        document.getElementById("valorAporteSaldo");
 
     const valor =
-        Number(
-            campo?.value
+        Number(campoValor?.value);
+
+    // ==========================================
+    // VALIDAÇÃO
+    // ==========================================
+
+    if (!valor || valor <= 0) {
+
+        toast(
+            "Informe um valor válido.",
+            "warning"
         );
-
-
-    const sucesso =
-        await realizarAporte(
-            cartaoSelecionado,
-            valor
-        );
-
-
-    if (!sucesso) {
 
         return;
-
     }
 
-
-    fecharModalAporte();
-
-
     // ==========================================
-    // ATUALIZAR DRAWER
+    // CONFIRMAÇÃO
     // ==========================================
 
-    if (
-        typeof abrirDrawer ===
-        "function" &&
-        cartaoSelecionado
-    ) {
+    const confirmar = confirm(
+        "Deseja adicionar " +
+        valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }) +
+        " ao saldo da plataforma?"
+    );
 
-        abrirDrawer(
-            cartaoSelecionado
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        // ==========================================
+        // BUSCAR SALDO ATUAL
+        // ==========================================
+
+        const {
+            data: conta,
+            error: erroBusca
+        } = await supabaseClient
+            .from("conta_caju")
+            .select("id, saldo")
+            .eq("id", 1)
+            .single();
+
+        if (erroBusca) {
+
+            console.error(
+                "Erro ao buscar saldo:",
+                erroBusca
+            );
+
+            toast(
+                "Não foi possível consultar o saldo da plataforma.",
+                "error"
+            );
+
+            return;
+        }
+
+        // ==========================================
+        // CALCULAR NOVO SALDO
+        // ==========================================
+
+        const saldoAtual =
+            Number(conta.saldo || 0);
+
+        const novoSaldo =
+            saldoAtual + valor;
+
+        console.log(
+            "Saldo calculado:",
+            {
+                saldoAtual,
+                valor,
+                novoSaldo
+            }
         );
 
+        // ==========================================
+        // ATUALIZAR SUPABASE
+        // ==========================================
+
+        const {
+            data: contaAtualizada,
+            error: erroAtualizacao
+        } = await supabaseClient
+            .from("conta_caju")
+            .update({
+                saldo: novoSaldo,
+                atualizado_em: new Date().toISOString()
+            })
+            .eq("id", 1)
+            .select()
+            .single();
+
+        // ==========================================
+        // VERIFICAR ERRO
+        // ==========================================
+
+        if (erroAtualizacao) {
+
+            console.error(
+                "ERRO AO ATUALIZAR CONTA CAJU:",
+                erroAtualizacao
+            );
+
+            toast(
+                "Não foi possível atualizar o saldo da plataforma.",
+                "error"
+            );
+
+            return;
+        }
+
+        // ==========================================
+        // CONFIRMAR QUE O BANCO ALTEROU
+        // ==========================================
+
+        console.log(
+            "CONTA ATUALIZADA NO SUPABASE:",
+            contaAtualizada
+        );
+
+        // ==========================================
+        // FECHAR MODAL
+        // ==========================================
+
+        fecharAporteSaldo();
+
+        // ==========================================
+        // LIMPAR CAMPO
+        // ==========================================
+
+        if (campoValor) {
+            campoValor.value = "";
+        }
+
+        // ==========================================
+        // ATUALIZAR DASHBOARD
+        // ==========================================
+
+        if (
+            typeof atualizarDashboardFinanceiro ===
+            "function"
+        ) {
+            await atualizarDashboardFinanceiro();
+        }
+
+        // ==========================================
+        // SUCESSO
+        // ==========================================
+
+        toast(
+            "Aporte adicionado com sucesso.",
+            "success"
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "Erro inesperado ao realizar aporte de saldo:",
+            erro
+        );
+
+        toast(
+            "Erro ao realizar aporte de saldo.",
+            "error"
+        );
     }
-
-
-    cartaoSelecionado = null;
-
 }
 
 
