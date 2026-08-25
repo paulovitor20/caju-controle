@@ -1018,7 +1018,10 @@ async function confirmarAporteSaldo() {
 
             return;
         }
-
+        console.log(
+            "CONTA ATUALIZADA NO SUPABASE:",
+            contaAtualizada
+        );
         // ==========================================
         // SUCESSO
         // ==========================================
