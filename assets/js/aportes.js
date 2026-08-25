@@ -897,3 +897,12 @@ function abrirAporteSaldo() {
 
     abrirModal("modalAporteSaldo");
 }
+
+
+function fecharAporteSaldo() {
+    const modal = document.getElementById("modalAporteSaldo");
+
+    if (modal) {
+        modal.classList.remove("active");
+    }
+}
