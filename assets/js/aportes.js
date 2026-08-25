@@ -182,7 +182,6 @@ function fecharModalAporte() {
 // CONFIRMAR APORTE DE SALDO
 // PLATAFORMA ← DINHEIRO
 // ==========================================
-
 async function confirmarAporteSaldo() {
 
     const campoValor =
@@ -190,10 +189,6 @@ async function confirmarAporteSaldo() {
 
     const valor =
         Number(campoValor?.value);
-
-    // ==========================================
-    // VALIDAÇÃO
-    // ==========================================
 
     if (!valor || valor <= 0) {
 
@@ -204,10 +199,6 @@ async function confirmarAporteSaldo() {
 
         return;
     }
-
-    // ==========================================
-    // CONFIRMAÇÃO
-    // ==========================================
 
     const confirmar = confirm(
         "Deseja adicionar " +
@@ -223,10 +214,6 @@ async function confirmarAporteSaldo() {
     }
 
     try {
-
-        // ==========================================
-        // BUSCAR SALDO ATUAL
-        // ==========================================
 
         const {
             data: conta,
@@ -252,10 +239,6 @@ async function confirmarAporteSaldo() {
             return;
         }
 
-        // ==========================================
-        // CALCULAR NOVO SALDO
-        // ==========================================
-
         const saldoAtual =
             Number(conta.saldo || 0);
 
@@ -271,12 +254,7 @@ async function confirmarAporteSaldo() {
             }
         );
 
-        // ==========================================
-        // ATUALIZAR SUPABASE
-        // ==========================================
-
         const {
-            data: contaAtualizada,
             error: erroAtualizacao
         } = await supabaseClient
             .from("conta_caju")
@@ -284,13 +262,7 @@ async function confirmarAporteSaldo() {
                 saldo: novoSaldo,
                 atualizado_em: new Date().toISOString()
             })
-            .eq("id", 1)
-            .select()
-            .single();
-
-        // ==========================================
-        // VERIFICAR ERRO
-        // ==========================================
+            .eq("id", 1);
 
         if (erroAtualizacao) {
 
@@ -307,32 +279,29 @@ async function confirmarAporteSaldo() {
             return;
         }
 
-        // ==========================================
-        // CONFIRMAR QUE O BANCO ALTEROU
-        // ==========================================
-
         console.log(
-            "CONTA ATUALIZADA NO SUPABASE:",
-            contaAtualizada
+            "UPDATE DA CONTA CAJU EXECUTADO COM SUCESSO",
+            {
+                saldoAnterior: saldoAtual,
+                valorAdicionado: valor,
+                novoSaldo: novoSaldo
+            }
         );
 
-        // ==========================================
-        // FECHAR MODAL
-        // ==========================================
-
         fecharAporteSaldo();
-
-        // ==========================================
-        // LIMPAR CAMPO
-        // ==========================================
 
         if (campoValor) {
             campoValor.value = "";
         }
 
-        // ==========================================
-        // ATUALIZAR DASHBOARD
-        // ==========================================
+        const campoDescricao =
+            document.getElementById(
+                "descricaoAporteSaldo"
+            );
+
+        if (campoDescricao) {
+            campoDescricao.value = "";
+        }
 
         if (
             typeof atualizarDashboardFinanceiro ===
@@ -340,10 +309,6 @@ async function confirmarAporteSaldo() {
         ) {
             await atualizarDashboardFinanceiro();
         }
-
-        // ==========================================
-        // SUCESSO
-        // ==========================================
 
         toast(
             "Aporte adicionado com sucesso.",
@@ -1148,10 +1113,6 @@ async function confirmarAporteSaldo() {
 
             return;
         }
-        console.log(
-            "CONTA ATUALIZADA NO SUPABASE:",
-            contaAtualizada
-        );
         // ==========================================
         // SUCESSO
         // ==========================================
