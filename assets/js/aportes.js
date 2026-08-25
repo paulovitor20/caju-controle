@@ -906,3 +906,181 @@ function fecharAporteSaldo() {
         modal.classList.remove("active");
     }
 }
+// ==========================================
+// CONFIRMAR APORTE DE SALDO
+// PLATAFORMA ← DINHEIRO
+// ==========================================
+
+async function confirmarAporteSaldo() {
+
+    const campoValor =
+        document.getElementById("valorAporteSaldo");
+
+    const valor =
+        Number(campoValor?.value);
+
+    // ==========================================
+    // VALIDAÇÃO
+    // ==========================================
+
+    if (!valor || valor <= 0) {
+
+        toast(
+            "Informe um valor válido.",
+            "warning"
+        );
+
+        return;
+    }
+
+    // ==========================================
+    // CONFIRMAÇÃO
+    // ==========================================
+
+    const confirmar = confirm(
+        "Deseja adicionar " +
+        valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }) +
+        " ao saldo da plataforma?"
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        // ==========================================
+        // BUSCAR SALDO ATUAL DA PLATAFORMA
+        // ==========================================
+
+        const {
+            data: conta,
+            error: erroBusca
+        } = await supabaseClient
+            .from("conta_caju")
+            .select("id, saldo")
+            .eq("id", 1)
+            .single();
+
+        if (erroBusca) {
+
+            console.error(
+                "Erro ao buscar saldo da plataforma:",
+                erroBusca
+            );
+
+            toast(
+                "Não foi possível consultar o saldo da plataforma.",
+                "error"
+            );
+
+            return;
+        }
+
+        // ==========================================
+        // CALCULAR NOVO SALDO
+        // ==========================================
+
+        const saldoAtual =
+            Number(conta.saldo || 0);
+
+        const novoSaldo =
+            saldoAtual + valor;
+
+        // ==========================================
+        // ATUALIZAR CONTA CAJU
+        // ==========================================
+
+        const {
+            error: erroAtualizacao
+        } = await supabaseClient
+            .from("conta_caju")
+            .update({
+                saldo: novoSaldo,
+                atualizado_em: new Date().toISOString()
+            })
+            .eq("id", 1);
+
+        if (erroAtualizacao) {
+
+            console.error(
+                "Erro ao atualizar saldo:",
+                erroAtualizacao
+            );
+
+            toast(
+                "Não foi possível atualizar o saldo da plataforma.",
+                "error"
+            );
+
+            return;
+        }
+
+        // ==========================================
+        // SUCESSO
+        // ==========================================
+
+        toast(
+            "Aporte adicionado com sucesso.",
+            "success"
+        );
+
+        // ==========================================
+        // FECHAR MODAL
+        // ==========================================
+
+        fecharAporteSaldo();
+
+        // ==========================================
+        // LIMPAR CAMPOS
+        // ==========================================
+
+        if (campoValor) {
+            campoValor.value = "";
+        }
+
+        const campoDescricao =
+            document.getElementById(
+                "descricaoAporteSaldo"
+            );
+
+        if (campoDescricao) {
+            campoDescricao.value = "";
+        }
+
+        // ==========================================
+        // ATUALIZAR DASHBOARD
+        // ==========================================
+
+        if (
+            typeof atualizarDashboardFinanceiro ===
+            "function"
+        ) {
+            await atualizarDashboardFinanceiro();
+        }
+
+        console.log(
+            "Aporte de saldo realizado:",
+            {
+                valor: valor,
+                saldoAnterior: saldoAtual,
+                novoSaldo: novoSaldo
+            }
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "Erro inesperado ao realizar aporte de saldo:",
+            erro
+        );
+
+        toast(
+            "Erro ao realizar aporte de saldo.",
+            "error"
+        );
+    }
+}
