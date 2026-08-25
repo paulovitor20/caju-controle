@@ -790,3 +790,95 @@ async function confirmarNovoEstorno() {
     return true;
 
 }
+// ==========================================
+// NOVO APORTE — PLATAFORMA → CARTÃO
+// ==========================================
+
+async function abrirNovoAporte() {
+
+    const select =
+        document.getElementById("cartaoNovoAporte");
+
+    if (!select) {
+
+        console.error(
+            "Campo cartaoNovoAporte não encontrado."
+        );
+
+        toast(
+            "Campo de cartão não encontrado.",
+            "error"
+        );
+
+        return;
+    }
+
+    // Limpar opções
+    select.innerHTML = `
+        <option value="">
+            Selecione um cartão...
+        </option>
+    `;
+
+    try {
+
+        // Recarregar cartões
+        await CartaoService.carregar();
+
+        const cartoes =
+            CartaoService.listar();
+
+        // Preencher cartões
+        cartoes.forEach(cartao => {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                cartao.id;
+
+            option.textContent =
+                `${cartao.funcionario} — Final ${cartao.final} — ${Number(
+                    cartao.saldo || 0
+                ).toLocaleString(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL"
+                    }
+                )}`;
+
+            select.appendChild(option);
+
+        });
+
+        // Limpar valor
+        const campoValor =
+            document.getElementById(
+                "valorNovoAporte"
+            );
+
+        if (campoValor) {
+            campoValor.value = "";
+        }
+
+        // Abrir modal
+        abrirModal(
+            "modalNovoAporte"
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao preparar novo aporte:",
+            erro
+        );
+
+        toast(
+            "Não foi possível carregar os cartões.",
+            "error"
+        );
+
+    }
+
+}

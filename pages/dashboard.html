@@ -137,7 +137,9 @@
 
                         <button class="acao azul" onclick="abrirAporteSaldo()">
                             💰
-                            <span>Aporte de Saldo</span>
+                            <span>
+                                Aporte de Saldo
+                            </span>
                         </button>
 
                     </div>
@@ -291,23 +293,17 @@
         </main>
 
     </div>
-    <!-- ==========================================
-     MODAL APORTE DE SALDO DA PLATAFORMA
-========================================== -->
-
-    <div class="modal" id="modalAporteSaldo">
+    <div class="modal" id="modalNovoAporte">
 
         <div class="modal-content">
 
             <div class="modal-header">
 
                 <h2>
-                    Aporte de Saldo
-                </h2>
 
-                <button type="button" class="btn-close" onclick="fecharModal('modalAporteSaldo')" aria-label="Fechar">
-                    ×
-                </button>
+                    Novo Aporte
+
+                </h2>
 
             </div>
 
@@ -316,25 +312,44 @@
                 <div class="form-group">
 
                     <label>
-                        Valor do aporte
+
+                        Cartão
+
                     </label>
 
-                    <input type="number" id="valorAporteSaldo" min="0.01" step="0.01" placeholder="0,00">
+                    <select id="cartaoNovoAporte">
+                        <option value="">
+                            Selecione um cartão...
+                        </option>
+                    </select>
 
                 </div>
 
-                <div id="mensagemAporteSaldo" style="display:none;"></div>
+                <div class="form-group">
+
+                    <label>
+
+                        Valor
+
+                    </label>
+
+                    <input type="number" id="valorNovoAporte" min="0.01" step="0.01" placeholder="0,00">
+                </div>
 
             </div>
 
             <div class="modal-footer">
 
-                <button class="btn btn-secondary" onclick="fecharModal('modalAporteSaldo')">
+                <button class="btn btn-secondary" onclick="fecharModal('modalNovoAporte')">
+
                     Cancelar
+
                 </button>
 
-                <button class="btn btn-primary" onclick="confirmarAporteSaldo()">
-                    Confirmar Aporte
+                <button class="btn btn-primary" onclick="confirmarNovoAporte()">
+
+                    Confirmar
+
                 </button>
 
             </div>
@@ -755,18 +770,7 @@
 
         AuthGuard.protegerPagina();
 
-        function abrirAporteSaldo() {
-            document.getElementById('modalAporteSaldo').classList.add('active');
-
-            const campo = document.getElementById('valorAporteSaldo');
-
-            if (campo) {
-                campo.value = '';
-                campo.focus();
-            }
-        }
     </script>
-
 </body>
 
 </html>
