@@ -882,3 +882,18 @@ async function abrirNovoAporte() {
     }
 
 }
+// ==========================================
+// APORTE DE SALDO — ENTRADA NA PLATAFORMA
+// ==========================================
+
+function abrirAporteSaldo() {
+
+    const campoValor =
+        document.getElementById("valorAporteSaldo");
+
+    if (campoValor) {
+        campoValor.value = "";
+    }
+
+    abrirModal("modalAporteSaldo");
+}
