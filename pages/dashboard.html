@@ -135,16 +135,11 @@
 
                         </button>
 
-                        <button class="acao vermelho">
-
-                            ⚖
-
+                        <button class="acao azul" onclick="abrirAporteSaldo()">
+                            💰
                             <span>
-
-                                Ajuste
-
+                                Aporte de Saldo
                             </span>
-
                         </button>
 
                     </div>
@@ -179,27 +174,12 @@
 
                             </thead>
 
-                            <tbody>
-
+                            <tbody id="tbodyUltimasMovimentacoes">
                                 <tr>
-
-                                    <div class="empty-state">
-
-                                        <div class="empty-icon">
-                                            📄
-                                        </div>
-
-                                        <h3>
-                                            Nenhuma movimentação encontrada
-                                        </h3>
-
-                                        <p>
-                                            Quando houver lançamentos eles aparecerão aqui.
-                                        </p>
-
-                                    </div>
+                                    <td colspan="4" class="empty">
+                                        Carregando movimentações...
+                                    </td>
                                 </tr>
-
                             </tbody>
 
                         </table>
@@ -228,7 +208,7 @@
 
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbodyCartoesMenorSaldo">
 
                                 <tr>
 
@@ -378,7 +358,7 @@
 
     </div>
     <!-- ==========================================
-     MODAL APORTE DE SALDO DA PLATAFORMA
+     MODAL APORTE DE SALDO NA CONTA CAJU
 ========================================== -->
 
     <div class="modal" id="modalAporteSaldo">
@@ -387,60 +367,72 @@
 
             <div class="modal-header">
 
-                <h2>Aporte de Saldo</h2>
+                <h2>
+                    Aporte de Saldo
+                </h2>
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    onclick="fecharModal('modalAporteSaldo')"
-                    aria-label="Fechar"
-                >
+                <button type="button" class="btn-close" onclick="fecharAporteSaldo()" aria-label="Fechar">
+
                     ×
+
                 </button>
 
             </div>
+
 
             <div class="modal-body">
 
                 <div class="form-group">
 
                     <label for="valorAporteSaldo">
-                        Valor do aporte
+                        Valor
                     </label>
 
-                    <input
-                        type="number"
-                        id="valorAporteSaldo"
-                        min="0.01"
-                        step="0.01"
-                        placeholder="0,00"
-                    >
+                    <input type="number" id="valorAporteSaldo" min="0.01" step="0.01" placeholder="0,00">
 
                 </div>
 
-                <div
-                    id="mensagemAporteSaldo"
-                    style="display:none;"
-                ></div>
+
+                <div class="form-group">
+
+                    <label for="descricaoAporteSaldo">
+                        Descrição
+                    </label>
+
+                    <textarea id="descricaoAporteSaldo" rows="4" placeholder="Ex.: Recarga da conta CAJU..."></textarea>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Conta CAJU
+                    </strong>
+
+                    <p>
+                        Este aporte será adicionado diretamente
+                        ao saldo disponível da Conta CAJU.
+                    </p>
+
+                </div>
 
             </div>
 
+
             <div class="modal-footer">
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="fecharModal('modalAporteSaldo')"
-                >
+                <button type="button" class="btn btn-secondary" onclick="fecharAporteSaldo()">
+
                     Cancelar
+
                 </button>
 
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="confirmarAporteSaldo()"
-                >
+
+                <button type="button" class="btn btn-primary" onclick="confirmarAporteSaldo()">
+
                     Confirmar Aporte
+
                 </button>
 
             </div>
@@ -448,7 +440,6 @@
         </div>
 
     </div>
-
     <!-- ==========================================
      MODAL NOVA DESPESA
 ========================================== -->
