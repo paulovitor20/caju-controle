@@ -274,12 +274,12 @@ function renderizarTabela() {
                 <td>
 
                     ${Number(cartao.saldo || 0).toLocaleString(
-            "pt-BR",
-            {
-                style: "currency",
-                currency: "BRL"
-            }
-        )}
+                        "pt-BR",
+                        {
+                            style: "currency",
+                            currency: "BRL"
+                        }
+                    )}
 
                 </td>
 
@@ -311,7 +311,6 @@ function renderizarTabela() {
                         👁
                     </button>
 
-
                     <!-- ATIVAR / INATIVAR -->
                     <button
                         class="btn-inativar btn-icon"
@@ -332,7 +331,6 @@ function renderizarTabela() {
                             }
 
                     </button>
-
 
                     <!-- EXCLUIR -->
                     <button
