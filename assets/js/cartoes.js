@@ -20,7 +20,184 @@ async function adicionarCartao(dados) {
     renderizarTabela();
 
 }
+// ==========================================
+// ALTERAR STATUS DO CARTÃO
+// ==========================================
 
+async function alterarStatusCartao(id, novoStatus) {
+
+    const status = String(novoStatus || "").toLowerCase();
+
+    // ==========================================
+    // VALIDAR STATUS
+    // ==========================================
+
+    if (!["ativo", "inativo"].includes(status)) {
+
+        toast(
+            "Status inválido.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    // ==========================================
+    // BUSCAR CARTÃO
+    // ==========================================
+
+    const cartao = CartaoService.buscar(id);
+
+    if (!cartao) {
+
+        toast(
+            "Cartão não encontrado.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    // ==========================================
+    // VERIFICAR AÇÃO
+    // ==========================================
+
+    const vaiInativar =
+        status === "inativo";
+
+
+    // ==========================================
+    // CONFIRMAÇÃO
+    // ==========================================
+
+    const confirmar = confirm(
+
+        vaiInativar
+
+            ? `Deseja realmente inativar o cartão de ${cartao.funcionario}?\n\nO cartão continuará cadastrado, mas não poderá ser utilizado para novos lançamentos.`
+
+            : `Deseja realmente reativar o cartão de ${cartao.funcionario}?`
+
+    );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    // ==========================================
+    // ALTERAR NO SUPABASE
+    // ==========================================
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.rpc(
+            "alterar_status_cartao",
+            {
+                p_cartao_id: Number(id),
+                p_status: status
+            }
+        );
+
+
+        // ==========================================
+        // TRATAR ERRO
+        // ==========================================
+
+        if (error) {
+
+            console.error(
+                "Erro ao alterar status do cartão:",
+                error
+            );
+
+
+            toast(
+                error.message ||
+                "Não foi possível alterar o status do cartão.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // LOG
+        // ==========================================
+
+        console.log(
+            "Status do cartão alterado:",
+            data
+        );
+
+
+        // ==========================================
+        // RECARREGAR CARTÕES
+        // ==========================================
+
+        const carregou =
+            await CartaoService.carregar();
+
+
+        if (!carregou) {
+
+            toast(
+                "Status alterado, mas não foi possível atualizar a tabela.",
+                "warning"
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // ATUALIZAR TABELA
+        // ==========================================
+
+        renderizarTabela();
+
+
+        // ==========================================
+        // MENSAGEM
+        // ==========================================
+
+        toast(
+
+            vaiInativar
+
+                ? "Cartão inativado com sucesso."
+
+                : "Cartão ativado com sucesso.",
+
+            "success"
+
+        );
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro inesperado ao alterar status:",
+            erro
+        );
+
+
+        toast(
+            "Erro inesperado ao alterar o status do cartão.",
+            "error"
+        );
+
+    }
+
+}
 
 // ==========================================
 // RENDERIZAR TABELA
@@ -108,9 +285,17 @@ function renderizarTabela() {
 
                 <td>
 
-                    <span class="badge badge-success">
+                    <span class="badge ${
+                        String(cartao.status || "").toLowerCase() === "inativo"
+                            ? "badge-danger"
+                            : "badge-success"
+                    }">
 
-                        ${cartao.status}
+                        ${
+                            String(cartao.status || "").toLowerCase() === "inativo"
+                                ? "Inativo"
+                                : "Ativo"
+                        }
 
                     </span>
 
@@ -118,6 +303,7 @@ function renderizarTabela() {
 
                 <td>
 
+                    <!-- VISUALIZAR -->
                     <button
                         class="btn-icon"
                         onclick="abrirDrawer(${cartao.id})"
@@ -125,6 +311,30 @@ function renderizarTabela() {
                         👁
                     </button>
 
+
+                    <!-- ATIVAR / INATIVAR -->
+                    <button
+                        class="btn-icon"
+                        onclick="alterarStatusCartao(
+                            ${cartao.id},
+                            '${String(cartao.status || "").toLowerCase() === "inativo"
+                                ? "ativo"
+                                : "inativo"}'
+                        )"
+                        title="${String(cartao.status || "").toLowerCase() === "inativo"
+                                ? "Ativar cartão"
+                                : "Inativar cartão"
+                            }">
+
+                        ${String(cartao.status || "").toLowerCase() === "inativo"
+                                ? "🟢"
+                                : "⛔"
+                            }
+
+                    </button>
+
+
+                    <!-- EXCLUIR -->
                     <button
                         class="btn-icon danger"
                         onclick="removerCartao(${cartao.id})"
