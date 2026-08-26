@@ -1086,7 +1086,7 @@ async function carregarExtrato(cartaoId) {
     }
 
 }
-async function confirmarAporte() {
+async function confirmarNovoAporte() {
 
     const campoValor =
         document.getElementById("valorAporte");
