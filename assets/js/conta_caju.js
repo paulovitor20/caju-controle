@@ -1,7 +1,7 @@
 async function carregarSaldoContaCaju() {
     try {
 
-        const { data, error } = await supabaseClient
+        const { data, error } = await supabaset
             .from('conta_caju')
             .select('saldo')
             .eq('id', 1)
