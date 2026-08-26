@@ -1086,7 +1086,59 @@ async function carregarExtrato(cartaoId) {
     }
 
 }
+async function confirmarAporte() {
 
+    const campoValor =
+        document.getElementById("valorAporte");
+
+    const valor =
+        Number(campoValor?.value);
+
+    if (!cartaoSelecionado) {
+
+        toast(
+            "Cartão não identificado.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (!valor || valor <= 0) {
+
+        toast(
+            "Informe um valor válido.",
+            "warning"
+        );
+
+        return;
+    }
+
+    const sucesso =
+        await realizarAporte(
+            cartaoSelecionado,
+            valor
+        );
+
+    if (!sucesso) {
+        return;
+    }
+
+    fecharModal("modalAporte");
+
+    if (typeof CartaoService !== "undefined") {
+        await CartaoService.carregar();
+    }
+
+    if (typeof renderizarTabela === "function") {
+        renderizarTabela();
+    }
+
+    toast(
+        "Aporte realizado com sucesso.",
+        "success"
+    );
+}
 // ==========================================
 // MARCAR DESPESA COMO PAGA
 // ==========================================
