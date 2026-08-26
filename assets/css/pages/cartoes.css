@@ -373,10 +373,9 @@ td {
     background: #F1F5F9;
 
 }
-
-/* ================================
-   AÇÕES DOS CARTÕES
-================================ */
+/* =====================================================
+   BOTÕES DE AÇÕES DOS CARTÕES
+   ===================================================== */
 
 .acoes {
     display: flex;
@@ -386,21 +385,33 @@ td {
     white-space: nowrap;
 }
 
+/* Todos os botões das ações */
 .acoes button {
     width: 38px;
     height: 38px;
-    display: flex;
+
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+
     padding: 0;
+    margin: 0;
+
     border: none;
     border-radius: 10px;
+
     cursor: pointer;
-    transition: all 0.2s ease;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+/* Efeito ao passar o mouse */
 .acoes button:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
 }
 
 /* Visualizar */
@@ -409,7 +420,7 @@ td {
     color: #0f172a;
 }
 
-/* Inativar */
+/* Inativar / Ativar */
 .acoes .btn-inativar {
     background: #ffe4e6;
     color: #e11d48;

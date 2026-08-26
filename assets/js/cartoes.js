@@ -305,7 +305,7 @@ function renderizarTabela() {
 
                     <!-- VISUALIZAR -->
                     <button
-                        class="btn-visualizar btn-icon"
+                        class="btn-visualizar"
                         onclick="abrirDrawer(${cartao.id})"
                         title="Visualizar">
                         👁
@@ -314,7 +314,7 @@ function renderizarTabela() {
 
                     <!-- ATIVAR / INATIVAR -->
                     <button
-                        class="btn-inativar btn-icon"
+                        class="btn-inativar"
                         onclick="alterarStatusCartao(
                             ${cartao.id},
                             '${String(cartao.status || "").toLowerCase() === "inativo"
@@ -336,7 +336,7 @@ function renderizarTabela() {
 
                     <!-- EXCLUIR -->
                     <button
-                        class="btn-excluir btn-icon danger"
+                        class="btn-excluir danger"
                         onclick="removerCartao(${cartao.id})"
                         title="Excluir">
                         🗑
