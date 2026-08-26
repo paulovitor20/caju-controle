@@ -373,3 +373,50 @@ td {
     background: #F1F5F9;
 
 }
+
+/* ================================
+   AÇÕES DOS CARTÕES
+================================ */
+
+.acoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.acoes button {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.acoes button:hover {
+    transform: translateY(-2px);
+}
+
+/* Visualizar */
+.acoes .btn-visualizar {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Inativar */
+.acoes .btn-inativar {
+    background: #ffe4e6;
+    color: #e11d48;
+}
+
+/* Excluir */
+.acoes .btn-excluir {
+    background: #fee2e2;
+    color: #dc2626;
+}
