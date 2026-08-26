@@ -255,6 +255,7 @@ async function confirmarAporteSaldo() {
         );
 
         const {
+            data: contaAtualizada,
             error: erroAtualizacao
         } = await supabaseClient
             .from("conta_caju")
@@ -262,7 +263,9 @@ async function confirmarAporteSaldo() {
                 saldo: novoSaldo,
                 atualizado_em: new Date().toISOString()
             })
-            .eq("id", 1);
+            .eq("id", 1)
+            .select("id, saldo, atualizado_em")
+            .single();
 
         if (erroAtualizacao) {
 
@@ -280,12 +283,8 @@ async function confirmarAporteSaldo() {
         }
 
         console.log(
-            "UPDATE DA CONTA CAJU EXECUTADO COM SUCESSO",
-            {
-                saldoAnterior: saldoAtual,
-                valorAdicionado: valor,
-                novoSaldo: novoSaldo
-            }
+            "CONTA CAJU ATUALIZADA:",
+            contaAtualizada
         );
 
         fecharAporteSaldo();
