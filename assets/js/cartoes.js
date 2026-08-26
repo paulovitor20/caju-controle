@@ -301,7 +301,7 @@ function renderizarTabela() {
 
                 </td>
 
-                <td class="acoes">
+                <td class="acoes-cartoes">
 
                     <!-- VISUALIZAR -->
                     <button

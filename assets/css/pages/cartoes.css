@@ -377,7 +377,7 @@ td {
    BOTÕES DE AÇÕES DOS CARTÕES
    ===================================================== */
 
-.acoes {
+.acoes-cartoes {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -385,7 +385,7 @@ td {
     white-space: nowrap;
 }
 
-.acoes button {
+.acoes-cartoes button {
     width: 38px;
     height: 38px;
     min-width: 38px;
@@ -398,24 +398,24 @@ td {
     flex-shrink: 0;
 }
 
-.acoes button:hover {
+.acoes-cartoes button:hover {
     transform: translateY(-1px);
 }
 
 /* Visualizar */
-.acoes .btn-visualizar {
+.acoes-cartoes .btn-visualizar {
     background: #f1f5f9;
     color: #0f172a;
 }
 
 /* Inativar / Ativar */
-.acoes .btn-inativar {
+.acoes-cartoes .btn-inativar {
     background: #ffe4e6;
     color: #e11d48;
 }
 
 /* Excluir */
-.acoes .btn-excluir {
+.acoes-cartoes .btn-excluir {
     background: #fee2e2;
     color: #dc2626;
 }
